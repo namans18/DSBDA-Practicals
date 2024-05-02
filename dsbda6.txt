@@ -1,0 +1,95 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+
+df = pd.read_csv('iris.csv')
+df
+
+df.shape
+df.columns
+df.dtypes
+df.info
+df.describe
+df.isnull()
+df.isnull().sum()
+
+df.head()
+
+sns.relplot(data = df, x='sepal_width' , y='sepal_length',hue='species')
+sns.relplot(data = df, x='petal_length' , y='petal_width',hue='species')
+sns.pairplot(df , hue = 'species')
+---------------------------------------
+
+plt.figure(figsize = (15,10))
+plt.subplot(2,2,1)
+sns.boxplot(data = df, x='species',y='petal_length')
+
+plt.subplot(2,2,2)
+sns.boxplot(data = df, x='species',y='petal_width')
+
+plt.subplot(2,2,3)
+sns.boxplot(data = df, x='species',y='sepal_length')
+
+plt.subplot(2,2,4)
+sns.boxplot(data = df, x='species',y='sepal_width')
+------------------------------------------------
+
+sns.boxplot(data = df)
+
+plt.subplots(figsize = (8,8))
+sns.heatmap(data = df,annot = True , fmt = 'f')
+
+x = df.iloc[:, 0:4].values
+x
+y = df.iloc[: ,4].values
+y
+
+
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+y = le.fit_transform(y)
+y
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=42)
+x_train
+x_train.shape
+
+y_train
+y_train.shape
+
+x_test
+x_test.shape
+y_test
+y_test.shape
+
+from sklearn.naive_bayes import GaussianNB
+model = GaussianNB()
+model.fit(x_train,y_train)
+model
+
+prediction = model.predict(x_test)
+prediction
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test,prediction)
+cm
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(y_test,prediction) * 100
+accuracy
+
+from sklearn.metrics import precision_score
+precision = precision_score(y_test,prediction,average='micro') * 100
+precision
+
+from sklearn.metrics import recall_score
+recall = recall_score(y_test,prediction,average='micro') * 100
+recall
+
+
+
+
+

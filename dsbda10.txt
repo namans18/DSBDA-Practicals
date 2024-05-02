@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+
+df = pd.read_csv('iris.csv')
+df
+
+df.shape
+df.columns
+df.dtypes
+df.info()
+df.describe()
+
+df.isnull().sum()
+
+df.describe()
+
+sns.distplot(df['sepal_length']) 4times
+
+sns.boxplot(x=df['sepal_length']) 4times
+
+plt.hist(df['sepal_length'])     4times
+
+sns.boxplot(data = df, x=df['species'],y=df['sepal_length'])   4times change y

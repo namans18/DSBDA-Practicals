@@ -1,0 +1,24 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv('iris.csv')
+df
+
+df.shape
+df.isnull()
+df.isnull().sum()
+
+df.describe()
+df.info()
+
+np.mean(df['sepal_length'])  4times 
+
+
+df['sepal_length'].describe()
+
+df.groupby('species').describe()
+df.groupby('species').describe().sum()
+
+df['sepal_length'].quantile(0.25)
+df['sepal_length'].quantile(0.50)
+df['sepal_length'].quantile(0.75)

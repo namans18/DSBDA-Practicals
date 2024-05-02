@@ -1,0 +1,33 @@
+from sklearn.datasets import fetch_openml
+boston = fetch_openml(name = 'boston',version=1)
+
+boston
+
+import pandas as pd
+import numpy as np
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
+
+df_x = pd.DataFrame(boston.data,columns= boston.feature_names)
+df_y = pd.DataFrame(boston.target)
+
+df_x
+df_y
+
+df_x.describe()
+df_y.describe()
+
+df_x.shape
+df_y.shape
+
+df_x.columns
+df_y.columns
+
+reg = linear_model.LinearRegression()
+x_train,x_test,y_train,y_test = train_test_split(df_x,df_y,test_size=0.25,random_state=7)
+reg.fit(x_train,y_train)
+
+reg.coef_
+
+y_test
+x_test

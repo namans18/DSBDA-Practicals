@@ -1,0 +1,86 @@
+import pandas as pd
+import numpy as np
+import matplotlib as plt
+%matplotlib inline
+import seaborn as sns
+
+df = pd.read_csv('Social_Network_Ads.csv')
+df
+
+df.shape
+df.columns
+df.dtypes
+df.info()
+df.describe()
+
+x = df.iloc[: ,[2,3]].values
+x
+
+y = df.iloc[: ,4].values
+y
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.25,random_state= 44)
+
+x_train
+xtrain.shape
+
+y_train
+y_train.shape
+
+x_test
+x_test.shape
+
+y_test
+y_test.shape
+
+from sklearn.preprocessing import StandardScaler
+sc_x = StandardScaler()
+x_train = sc_x.fit_transform(x_train)
+x_test = sc_x.fit_transform(x_test)
+
+x_train
+x_test
+
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state = 25)
+classifier.fit(x_train,y_train)
+
+y_pred = classifier.predict(x_test)
+y_pred
+y_test
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test,y_pred)
+cm
+
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(y_test,y_pred)*100
+acc
+
+tp = cm[0,[0]]
+print('True Positive:', tp)
+
+fp = cm[0,[1]]
+print('True Positive:', fp)
+
+fn = cm[1,[0]]
+print('False Negative',fn)
+
+tn = cm[1,[1]]
+print('True Negative',tn)
+
+accuracy_cm = (tp+tn)/(tp+tn+fp+fn)*100
+print('Accuracy:', accuracy_cm)
+
+error_rate = (fp+fn)/(tp+tn+fp+fn)*100
+print('Error:', error_rate)
+
+precision = tp/(tp+fp)*100
+print('Precision'),precision
+
+recall = tp/(tp+fn)*100
+print('Recall:',recall)
+
+specificity = tn/(tn+fp)*100
+print('Specificity:',specificity)

@@ -1,0 +1,72 @@
+get_ipython().system('pip list')
+
+pip install nltk
+
+import nltk
+nltk.download('punkt')
+
+from nltk import tokenize
+from nltk.tokenize import sent_tokenize
+text="Hello Everyone This is YB,Its Fun Learning DSBDA"
+text
+
+tokensized_text = sent_tokenize(text)
+text
+
+from nltk.tokenize import word_tokenize
+tokensized_word = word_tokenize(text)
+tokensized_word
+
+from nltk.probability import FreqDist
+fdist = FreqDist(tokensized_word)
+fdist
+
+fdist.most_common(4)
+
+import matplotlib.pyplot as plt
+fdist.plot(20,cumulative=False)
+plt.show()
+
+nltk.download('stopwords')
+
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))
+stop_words
+
+
+filtered_sent = []
+w=[]
+if w in tokensized_word:
+    if wnot in stop_words:
+        filtered_sent.append(w)
+print("Tokenized Word:",tokensized_word)
+print("Filtered Word:",filtered_sent)
+
+
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize,word_tokenize
+ps=PorterStemmer()
+stemmer_words=[]
+for w in filtered_sent:
+    stemmer_words.append(ps.stem(w))
+print("Filtered Word:",filtered_sent)
+print("Stemmed Sentence:",stemmer_words)
+
+nltk.download('wordnet')
+
+
+from nltk.stem.wordnet import WordNetLemmatizer
+lem = WordNetLemmatizer()
+from nltk.stem.porter import PorterStemmer
+stem = PorterStemmer()
+word = 'better'
+print("Lematinized Word:",lem.lemmatize(word,'v'))
+print("Stemmaized Word:",stem.stem(word))
+
+
+nltk.download('averaged_perceptron_tagger')
+sent = "Yash Bhavathankar Was Born In Udgir In 2003"
+tokens = nltk.word_tokenize(sent)
+tokens
+
+nltk.pos_tag(tokens)

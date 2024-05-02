@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+
+df = pd.read_csv('StudentsPerformance.csv')
+df
+
+df.shape
+
+df.isnull().sum()
+
+df.dtypes
+
+df.columns
+
+columns = ['math score' ,'reading score','writing score',]
+df.boxplot(columns)
+
+
+#IQR Method
+
+q1 = df['math score'].quantile(0.25)
+q3 = df['math score'].quantile(0.75)
+iqr = q3 - q1
+
+q1,q3,iqr
+
+upper_limit = q3 + (1.5 * iqr)
+lower_limit = q1 - (1.5 * iqr)
+
+upper_limit,lower_limit
+
+df.loc[(df['math score'] > upper_limit) | (df['math score'] < lower_limit)]
+
+# triming- deleting the outliers
+next_df = df.loc[(df['math score'] < upper_limit) & (df['math score'] > lower_limit)]
+print('old_data:' , len(df))
+print('new_data:' , len(next_df))
+print('Outliers:' , len(df) - len(next_df))
+
+next_df.boxplot(columns)
+
+same with reading and writing score
+
+from sklearn.preprocessing import MinMaxScaler
+scaling = MinMaxScaler()
+scaling.fit_transform(next_df2[['math score','reading score','writing score']])
+
+

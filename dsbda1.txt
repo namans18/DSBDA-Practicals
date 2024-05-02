@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("train.csv")
+df
+
+df.shape
+df.columns
+
+df.isnull().sum()
+
+df['Age'] = df['Age'].interpolate()
+df['Cabin'] = df['Cabin'].replace(to_replace=np.nan,value = 'unknown')
+df['Embarked'].fillna(method = 'ffill',inplace=True)
+df.isnull().sum()
+
+df.dtypes
+df['Age'] = df['Age'].astype('int64')
+df.dtypes
+
+quantative_data = pd.get_dummies(df.Embarked,prefix = 'Embarked')
+quantative_data
+
+df = df.join(quantative_data)
+df
+
+df.drop(['Embarked'],axis = 1,inplace = True)
+df
+
+quantative_sex = pd.get_dummies(df.Sex,prefix = 'Sex')
+quantative_sex
+
+df=df.join(quantative_sex)
+df
+
+df.drop(['Sex'],axis=1,inplace=True)
+df
+
